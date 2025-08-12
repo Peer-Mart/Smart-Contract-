@@ -13,27 +13,27 @@ require("@nomicfoundation/hardhat-toolbox");
       },
     },
     networks: {
-      // Lisk Testnet (Sepolia)
-      'lisk-sepolia': {
-        url: "https://rpc.sepolia-api.lisk.com",
+      // Avalanche Fuji Testnet configuration
+      'fuji': {
+        url: "https://api.avax-test.network/ext/bc/C/rpc",
         accounts: [process.env.WALLET_KEY], // Your private key stored in .env
         gasPrice: 1000000000, // 1 Gwei gas price
       },
     },
     etherscan: {
-      apiKey: {
-        "lisk-sepolia": "123"
+       apiKey: {
+      fuji: "snowtrace", // Placeholder — Snowtrace now uses Routescan, no API key required
+    },
+    customChains: [
+      {
+        network: "fuji",
+        chainId: 43113,
+        urls: {
+          apiURL: "https://api.routescan.io/v2/network/testnet/evm/43113/etherscan",
+          browserURL: "https://testnet.avax.routescan.io",
+        },
       },
-      customChains: [
-        {
-          network: "lisk-sepolia",
-          chainId: 4202,
-          urls: {
-            apiURL: "https://sepolia-blockscout.lisk.com/api",
-            browserURL: "https://sepolia-blockscout.lisk.com"
-          }
-        }
-      ]
+    ],
     },
     sourcify: {
       enabled: false

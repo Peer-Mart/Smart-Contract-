@@ -30,8 +30,8 @@ A robust, upgradeable ECommerce marketplace smart contract system for the Ethere
 ### Installation
 
 ```bash
-git clone https://github.com/rocknwa/Peer-Mart
-cd Peer-Mart/smart-contract
+git clone https://github.com/Peer-Mart/Smart-Contract-.git
+cd Smart-Contract
 npm install
 ```
 
@@ -104,7 +104,20 @@ hardhat.config.js
 3. Commit and push your changes.
 4. Open a Pull Request describing your changes.
 
- 
+# Deployed Addresses
+
+ECommerceModule#MockUSDC - 0xb7Aa8b8Be8fd0d07F5d00a94DCb7A187f69b21ff
+ECommerceModule#ECommerce - 0x445d64454aEe5dDB67413b9e8334767AFEd06f21
+
+# Verification
+
+Verifying contract "contracts/MockUSDC.sol:MockUSDC" for network fuji...
+Successfully verified contract "contracts/MockUSDC.sol:MockUSDC" for network fuji:
+  - https://testnet.avax.routescan.io/address/0xb7Aa8b8Be8fd0d07F5d00a94DCb7A187f69b21ff#code
+
+Verifying contract "contracts/ECommerce.sol:ECommerce" for network fuji...
+Successfully verified contract "contracts/ECommerce.sol:ECommerce" for network fuji:
+  - https://testnet.avax.routescan.io/address/0x445d64454aEe5dDB67413b9e8334767AFEd06f21#code
 
 ---
 
