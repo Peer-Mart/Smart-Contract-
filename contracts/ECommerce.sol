@@ -268,14 +268,13 @@ contract ECommerce is Ownable(msg.sender) {
         purchase.isSold = true;
         _product.totalSold += 1;
 
-        // Transfer USDC to the seller
-        bool success = usdc.transfer(_product.seller, paymentToSeller);
-        if (!success) revert USDCTransferFailed();
-
         // Update seller's confirmed purchases
         sellers[_product.seller].confirmedPurchases += 1;
 
         emit PaymentConfirmed(_id, _product.name, _product.price, _product.seller, payable(msg.sender));
+         // Transfer USDC to the seller
+        bool success = usdc.transfer(_product.seller, paymentToSeller);
+        if (!success) revert USDCTransferFailed();
     }
 
     /// @notice Cancel a purchase. Buyer receives refund minus penalty, seller receives penalty.
@@ -295,12 +294,6 @@ contract ECommerce is Ownable(msg.sender) {
         totalFeesCollected += fee;
         purchase.isPaid = false;
 
-        // Transfer USDC back to the buyer and to the seller as penalty
-        bool refundSuccess = usdc.transfer(purchase.buyer, refundToBuyer);
-        if (!refundSuccess) revert RefundToBuyerFailed();
-        bool penaltySuccess = usdc.transfer(_product.seller, paymentToSeller);
-        if (!penaltySuccess) revert PenaltyToSellerFailed();
-
         // Update seller's canceled purchases
         sellers[_product.seller].canceledPurchases += 1;
 
@@ -309,6 +302,12 @@ contract ECommerce is Ownable(msg.sender) {
 
         // Return product to stock
         _product.inventory += 1;
+
+   // Transfer USDC back to the buyer and to the seller as penalty
+        bool refundSuccess = usdc.transfer(purchase.buyer, refundToBuyer);
+        if (!refundSuccess) revert RefundToBuyerFailed();
+        bool penaltySuccess = usdc.transfer(_product.seller, paymentToSeller);
+        if (!penaltySuccess) revert PenaltyToSellerFailed();
     }
 
     /// @notice Report a cancelled purchase (for possible seller block)
